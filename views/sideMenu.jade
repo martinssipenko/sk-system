@@ -1,0 +1,41 @@
+ul.nav.nav-tabs.nav-stacked
+    case eventType
+        when '10km'
+            li(class=(eventAction === 'reg' ? 'active' : ''))
+                a(href='/10km/reg') Reģistrācija
+            li(class=(eventAction === 'sta' ? 'active' : ''))
+                a(href='/10km/sta') Starts
+            li(class=(eventAction === 'fin' ? 'active' : ''))
+                a(href='/10km/fin') Finišs
+            li(class=(eventAction === 'prot' ? 'active' : ''))
+                a(href='/10km/prot') Protokoli
+            li(class=(eventAction === 'kom' ? 'active' : ''))
+                a(href='/10km/kom') Komentētājs
+        when 'mtb'
+            li(class=(eventAction === 'reg' ? 'active' : ''))
+                a(href='/mtb/reg') Reģistrācija
+            li(class=(eventAction === 'sta' ? 'active' : ''))
+                a(href='/mtb/sta') Starts
+            li(class=(eventAction === 'fin' ? 'active' : ''))
+                a(href='/mtb/fin') Finišs
+            li(class=(eventAction === 'prot' ? 'active' : ''))
+                a(href='/mtb/prot') Protokoli
+        when 'tri'
+            li(class=(eventAction === 'reg' ? 'active' : ''))
+                a(href='/tri/reg') Reģistrācija
+            li(class=(eventAction === 'sta' ? 'active' : ''))
+                a(href='/tri/sta') Starts
+            li(class=(eventAction === 'fin' ? 'active' : ''))
+                a(href='/tri/fin') Finišs
+            li(class=(eventAction === 'prot' ? 'active' : ''))
+                a(href='/tri/prot') Protokoli
+        when 'fut'
+            li(class=(eventAction === 'reg' ? 'active' : ''))
+                a(href='/tri/reg') Reģistrācija
+            li(class=(eventAction === 'prot' ? 'active' : ''))
+                a(href='/tri/prot') Protokoli
+        when 'dg'
+            li(class=(eventAction === 'reg' ? 'active' : ''))
+                a(href='/tri/reg') Reģistrācija
+            li(class=(eventAction === 'prot' ? 'active' : ''))
+                a(href='/tri/prot') Protokoli

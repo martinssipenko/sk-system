@@ -1,0 +1,64 @@
+.navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+        .container
+          button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand(href='/') Šķūnenieku Kauss
+          .nav-collapse.collapse
+            ul.nav
+              li.dropdown(class=(eventType === '10km' ? 'active' : ''))
+                a(class='dropdown-toggle', href='/10km', data-toggle='dropdown') 10KM 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/10km/reg') Reģistrācija
+                    li
+                        a(href='/10km/sta') Starts
+                    li
+                        a(href='/10km/fin') Finišs
+                    li
+                        a(href='/10km/prot') Protokoli
+                    li
+                        a(href='/10km/kom') Komentētājs
+              li.dropdown(class=(eventType === 'mtb' ? 'active' : ''))
+                a(class='dropdown-toggle', href='/mtb', data-toggle='dropdown') MTB 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/mtb/reg') Reģistrācija
+                    li
+                        a(href='/mtb/sta') Starts
+                    li
+                        a(href='/mtb/fin') Finišs
+                    li
+                        a(href='/mtb/prot') Protokoli
+              li.dropdown(class=(eventType === 'tri' ? 'active' : ''))
+                a(class='dropdown-toggle', href='/tri', data-toggle='dropdown') Triatlons 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/tri/reg') Reģistrācija
+                    li
+                        a(href='/tri/sta') Starts
+                    li
+                        a(href='/tri/fin') Finišs
+                    li
+                        a(href='/tri/prot') Protokoli
+              li.dropdown(class=(eventType === 'fut' ? 'active' : ''))
+                a(class='dropdown-toggle', href='/fut', data-toggle='dropdown') Futbols 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/fut/reg') Reģistrācija
+                    li
+                        a(href='/fut/prot') Protokoli
+              li.dropdown(class=(eventType === 'dg' ? 'active' : ''))
+                a(class='dropdown-toggle', href='/dg', data-toggle='dropdown') Disk Golfs 
+                    b.caret
+                ul.dropdown-menu
+                    li
+                        a(href='/dg/reg') Reģistrācija
+                    li
+                        a(href='/dg/prot') Protokoli
