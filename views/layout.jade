@@ -11,10 +11,12 @@ html(lang='en')
     include menu
     .container
         .row
-            .span3
-                section
-                    include sideMenu
             .span9
                 section
                     block content
+            .span3
+                section
+                    //include sideMenu
+                    include stopwatch
+                    include infoBar
     script(src="/js/bootstrap.js")

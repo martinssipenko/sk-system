@@ -1,4 +1,59 @@
 extends layout
 
 block content
-    div breadcrumb here - rēģistrācija ???
+    ul.nav.nav-tabs
+        li.active
+            a(href='/10km/reg') Reģistrācija
+        li
+            a(href='/10km/reg/recent') Nesen reģistrētie
+    form
+        .row
+            .span5
+                .row
+                    .span1 Numurs:
+                    .span3
+                        input.input-mini(type='text', maxlength='3', tabindex='1')
+                .row
+                    .span1 Dalībnieks:
+                    .span3
+                        input.input-xlarge(type='text', tabindex='2')
+                .row
+                    .span1 Dz. gads:
+                    .span3
+                        input.input-mini(type='text', maxlength='4', tabindex='3')
+                .row
+                    .span1 Dzimums:
+                    .span3(style='height: 39px')
+                        label.radio.inline
+                            input(type='radio', name='gender', checked, , tabindex='4')
+                            | Vīrietis
+                        label.radio.inline
+                            input(type='radio', name='gender', tabindex='5')
+                            | Sieviete
+                .row
+                    .span1 Velosipēds:
+                    .span3
+                        select.input-xlarge(tabindex='6')
+                            option Tūristu
+                            option Sporta
+                            option Ceļa
+                            option Ārpus konkurences
+                .row
+                    .span1 Grupa:
+                    .span3
+                        .control-group.error(style='height: 29px')
+                            input.input-mini(type='text', readonly)
+                .row
+                    .span1 Komentārs:
+                    .span3
+                        input.input-xlarge(type='text')
+                .row
+                    .span1 Kolektīvs:
+                    .span3
+                        input.input-xlarge(type='text', tabindex='7')
+            .span4
+                | Te kaut ko var ielikt!
+        div.form-actions
+            button(type='submit', class='btn btn-primary', data-loading-text='Saglabāju...', tabindex='8') Reģistrēt
+            | 
+            button(type='button', class='btn') Atcelt

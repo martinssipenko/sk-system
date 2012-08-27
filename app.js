@@ -36,6 +36,7 @@ app.configure('development', function(){
 app.get('/', ind.reg);
 app.get('/10km', ind.reg);
 app.get('/10km/reg', ind.reg);
+app.get('/10km/reg/recent', ind.reg);
 app.get('/10km/sta', ind.sta);
 app.get('/10km/fin', ind.fin);
 app.get('/10km/prot', ind.prot);
