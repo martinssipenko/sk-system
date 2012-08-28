@@ -2,7 +2,22 @@
 /**
  * Module dependencies.
  */
+ 
+var express = require('express')
+  , app = express()
+  , ind = require('./routes/ind')
+  , mtb = require('./routes/mtb')
+  , tri = require('./routes/tri')
+  , fut = require('./routes/fut')
+  , dg = require('./routes/dg')
+  , http = require('http')
+  , server = http.createServer(app)
+  , path = require('path')
+  , io = require('socket.io').listen(server);
 
+//server.listen(8080);
+
+/*
 var express = require('express')
   , ind = require('./routes/ind')
   , mtb = require('./routes/mtb')
@@ -10,9 +25,11 @@ var express = require('express')
   , fut = require('./routes/fut')
   , dg = require('./routes/dg')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , io = require('socket.io').listen(server);
 
 var app = express();
+*/
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -64,6 +81,6 @@ app.get('/dg', dg.reg);
 app.get('/dg/reg', dg.reg);
 app.get('/dg/prot', dg.prot);
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
