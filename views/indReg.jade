@@ -6,54 +6,55 @@ block content
             a(href='/10km/reg') Reģistrācija
         li
             a(href='/10km/reg/recent') Nesen reģistrētie
-    form
+    #alert-area
+    form(method='post')
+        input(type='hidden', id='id', name='id')
+        input(type='hidden', id='blacklist', value='0')
         .row
-            .span5
+            .span9
                 .row
                     .span1 Numurs:
-                    .span3
-                        input.input-mini(type='text', maxlength='3', tabindex='1')
+                    .span6.control-group
+                        input.input-mini.mandatory(type='text', maxlength='3', tabindex='1', id='number', autocomplete='off')
                 .row
                     .span1 Dalībnieks:
-                    .span3
-                        input.input-xlarge(type='text', tabindex='2')
+                    .span6.control-group
+                        input.input-xlarge.mandatory(type='text', tabindex='2', data-provide='typeahead', id='name', autocomplete='off')
                 .row
                     .span1 Dz. gads:
-                    .span3
-                        input.input-mini(type='text', maxlength='4', tabindex='3')
+                    .span6.control-group
+                        input.input-mini.mandatory(type='text', maxlength='4', tabindex='3', id='birth_year', autocomplete='off')
                 .row
                     .span1 Dzimums:
-                    .span3(style='height: 39px')
+                    .span6.control-group(style='height: 39px')
                         label.radio.inline
-                            input(type='radio', name='gender', checked, , tabindex='4')
+                            input(type='radio', name='gender', checked, , tabindex='4', id='genderMale', value='M')
                             | Vīrietis
                         label.radio.inline
-                            input(type='radio', name='gender', tabindex='5')
+                            input(type='radio', name='gender', tabindex='5', id='genderFemale', value='F')
                             | Sieviete
                 .row
                     .span1 Velosipēds:
-                    .span3
-                        select.input-xlarge(tabindex='6')
-                            option Tūristu
-                            option Sporta
-                            option Ceļa
-                            option Ārpus konkurences
+                    .span6.control-group
+                        select.input-xlarge(tabindex='6', id='bicycle')
+                            option(value='T') Tūristu
+                            option(value='S') Sporta
+                            option(value='C') Ceļa
+                            option(value='AK') Ārpus konkurences
                 .row
                     .span1 Grupa:
-                    .span3
+                    .span6.control-group
                         .control-group.error(style='height: 29px')
-                            input.input-mini(type='text', readonly)
+                            input.input-mini(type='text', id='group', readonly)
                 .row
                     .span1 Komentārs:
-                    .span3
-                        input.input-xlarge(type='text')
+                    .span6.control-group
+                        input.input-xlarge(type='text', id='comment')
                 .row
                     .span1 Kolektīvs:
-                    .span3
-                        input.input-xlarge(type='text', tabindex='7')
-            .span4
-                | Te kaut ko var ielikt!
+                    .span6.control-group
+                        input.input-xlarge(type='text', tabindex='7', id='team')
         div.form-actions
-            button(type='submit', class='btn btn-primary', data-loading-text='Saglabāju...', tabindex='8') Reģistrēt
+            button(type='submit', id='submit', class='btn btn-primary', data-loading-text='Saglabāju...', tabindex='8', disabled) Reģistrēt
             | 
-            button(type='button', class='btn') Atcelt
+            button(type='reset', class='btn', id='reset') Atcelt

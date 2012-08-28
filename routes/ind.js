@@ -6,6 +6,10 @@ exports.reg = function(req, res) {
     });
 };
 
+exports.regpost = function(req, res) {
+    res.send('indReg');
+};
+
 exports.sta = function(req, res) {
     res.render('indReg', {
         title: 'Starts - 10KM - Šķūnenieku Kauss',
@@ -36,4 +40,8 @@ exports.kom = function(req, res) {
         eventType: '10km',
         eventAction: 'kom'
     });
+};
+
+exports.cnum = function(req, res) {
+    res.send('#SUCCESS');
 };

@@ -1,0 +1,5 @@
+[
+    {"name":"Mārtiņš Šipenko", "birth_year":"1989", "gender":"M", "blacklist":false},
+    {"name":"Gatis Kurzemnieks", "birth_year":"1979", "gender":"M", "blacklist":false},
+    {"name":"Linda Gudrīte", "birth_year":"1991", "gender":"F", "blacklist":"kaut ko izdarīja"}
+]
