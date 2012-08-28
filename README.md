@@ -1,5 +1,9 @@
-This is result system for "Ðíûnenieku Kauss".
-To install:
+Å Ä·Å«nenieku Kauss
+================
+
+Install
+-------
+
 1. Clone this repo
-2. run: npm install
-3. run: node app.js
+2.     npm install
+3.     node app.js
