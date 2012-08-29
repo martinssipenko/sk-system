@@ -1,3 +1,15 @@
+
+    var socket = io.connect('http://192.168.1.100:3000');
+    var sTime = 0;
+    var cTime = 0;
+    socket.on('startTime', function (data) {
+        sTime = data.time;
+    });
+    
+    socket.on('serverTime', function (data) {
+        cTime = data.time;
+    });
+    
 /* DOCUMENT READY */
 	$(document).ready(function() {
 		//Path.history.listen();
@@ -28,7 +40,7 @@
 			$('#submit').attr('disabled', 'disabled');
 		});
 		assignNameTypeahead();
-
+        setInterval(function(){refreshTimer()},100);
 	});
 
 /* FUNCTIONS */
@@ -202,17 +214,7 @@
 		return groups[age][bicycle+gender];
 	}
 
-    var socket = io.connect('http://192.168.1.100:3000');
-    var sTime = 0;
-    var cTime = 0;
-    socket.on('startTime', function (data) {
-        sTime = data.time;
-    });
-    
-    socket.on('serverTime', function (data) {
-        cTime = data.time;
-    });
-    
+    /* STOPWATCH */
     var timer = new Date();
     function refreshTimer() {
         if(cTime >= sTime) {
@@ -228,5 +230,3 @@
                                                          Math.round(timer.getMilliseconds()/100);
         cTime = cTime + 100;
     }
-
-    setInterval(function(){refreshTimer()},100);
