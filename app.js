@@ -76,6 +76,20 @@ app.post('/ajax/partlookup', function(req, res) {
     });
 });
 
+/* SOCKET.IO */
+io.sockets.on('connection', function (socket) {
+  //Month: 0 is Jan, 1 is Feb, 7 is Aug, etc.
+  //Year, Month, Day, Hours, Minutes, Seconds, Miliseconds
+  var sDate = new Date(2012, 7, 29, 12, 00, 00, 00);
+  var emitTime = function() {
+    var cDate = new Date();
+	socket.emit('serverTime', { time: cDate.getTime() });
+  }
+  emitTime();
+  setInterval(function(){emitTime();}, 60000);
+  socket.emit('startTime', { time: sDate.getTime() });
+});
+
 /* START SERVER */
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
