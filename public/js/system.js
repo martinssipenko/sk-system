@@ -146,7 +146,7 @@
 	function assignNameTypeahead() {
 		$("#name").typeahead({
 		  source: function (query, process) {
-			$.get('/js/tmp/typeahead.json', {query: query, items: 5}, function (data) {
+			$.post('/ajax/partlookup', {query: query, items: 5}, function (data) {
 			  labels = [];
               mapped = {};
 			  
@@ -165,7 +165,7 @@
 			$('#id').val(item.id);
 			var radios = $('input:radio[name=gender]');
 			radios.filter('[value='+item.gender+']').attr('checked', true);
-			if(item.blacklist != false) {
+			if(item.blacklist != undefined && item.blacklist != false) {
 				$('#alert-area').html('<div class="alert alert-block alert-error fade in hide" id="alert">' +
 								      '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
 									  '<p>Uzmanību! Šis dalībnieks ' + item.blacklist + '.</p></div>');

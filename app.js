@@ -3,6 +3,9 @@
  * Module dependencies.
  */
  
+var databaseUrl = "sksystem";
+var collections = ["participants"]
+ 
 var express = require('express')
   , app = express()
   , ind = require('./routes/ind')
@@ -13,23 +16,8 @@ var express = require('express')
   , http = require('http')
   , server = http.createServer(app)
   , path = require('path')
-  , io = require('socket.io').listen(server);
-
-//server.listen(8080);
-
-/*
-var express = require('express')
-  , ind = require('./routes/ind')
-  , mtb = require('./routes/mtb')
-  , tri = require('./routes/tri')
-  , fut = require('./routes/fut')
-  , dg = require('./routes/dg')
-  , http = require('http')
-  , path = require('path')
-  , io = require('socket.io').listen(server);
-
-var app = express();
-*/
+  , io = require('socket.io').listen(server)
+  , db = require('mongojs').connect(databaseUrl, collections);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -50,6 +38,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+/* ROUTE DEFINITIONS */
 app.get('/', ind.reg);
 app.get('/10km', ind.reg);
 app.get('/10km/reg', ind.reg);
@@ -81,6 +70,13 @@ app.get('/dg', dg.reg);
 app.get('/dg/reg', dg.reg);
 app.get('/dg/prot', dg.prot);
 
+app.post('/ajax/partlookup', function(req, res) {
+    db.participants.find({name: new RegExp(req.query.query)}, function(err, result) {
+        res.send(result);
+    });
+});
+
+/* START SERVER */
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
