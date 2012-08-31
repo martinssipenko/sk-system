@@ -5,9 +5,11 @@
  
 var databaseUrl = "sksystem";
 var collections = ["participants"]
- 
-var express = require('express')
-  , app = express()
+
+var h5bp = require('./lib/h5bp')
+  , express = require('express')
+  , path = require('path')
+  , app = h5bp.createServer({server: 'express', root: path.join(__dirname, 'public')})
   , ind = require('./routes/ind')
   , mtb = require('./routes/mtb')
   , tri = require('./routes/tri')
@@ -15,28 +17,27 @@ var express = require('express')
   , dg = require('./routes/dg')
   , http = require('http')
   , server = http.createServer(app)
-  , path = require('path')
   , io = require('socket.io').listen(server)
-  , db = require('mongojs').connect(databaseUrl, collections);
+  , db = require('mongojs').connect(databaseUrl, collections)
+  , gzippo = require('gzippo');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  //app.use(express.cookieParser('your secret here'));
+  //app.use(express.session());
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
+  //app.use(gzippo.staticGzip(__dirname + '/public'));
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler());
+  //app.use(express.errorHandler());
 });
+
+io.set('log level', '0')
+//io.set('browser client gzip', 'true')
 
 /* ROUTE DEFINITIONS */
 app.get('/', ind.reg);
