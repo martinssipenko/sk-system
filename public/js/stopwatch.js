@@ -26,7 +26,11 @@ Stopwatch.prototype.start = function(sTime) {
 Stopwatch.prototype.getElapsed = function() {
 	// * if watch is stopped, use that date, else use now
 	var elapsed = 0;
-	elapsed = (new Date() - this.startTime) - this.serverTimeDiff;
+    var cDate = new Date();
+    elapsed = (cDate - this.startTime) - this.serverTimeDiff;
+    if(cDate < this.startTime) {
+        elapsed -= 1000;
+    }
     
 	var hours = parseInt(elapsed / this.onehour);
 	elapsed %= this.onehour;
@@ -52,13 +56,14 @@ Stopwatch.prototype.setElapsed = function(hours, mins, secs) {
 }
 Stopwatch.prototype.toString = function() {
 	var zpad = function(no, digits) {
+        no = Math.abs(no);
 		no = no.toString();
 		while(no.length < digits)
 			no = '0' + no;
 		return no;
 	}
 	var e = this.getElapsed();
-	return zpad(e.hours,2) + ":" + zpad(e.minutes,2) + ":" + zpad(e.seconds,2) + "," + Math.round(e.milliseconds/100);
+	return zpad(e.hours,2) + ":" + zpad(e.minutes,2) + ":" + zpad(e.seconds,2) + "," + Math.abs(Math.round(e.milliseconds/100));
 }
 Stopwatch.prototype.setListener = function(listener) {
 	this.listener = listener;
