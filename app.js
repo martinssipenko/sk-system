@@ -19,10 +19,10 @@ var h5bp = require('./lib/h5bp')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server)
   , db = require('mongojs').connect(databaseUrl, collections)
-  , gzippo = require('gzippo');
+  , config = require('./config');
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || config.port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   //app.use(express.cookieParser('your secret here'));
@@ -79,9 +79,7 @@ app.post('/ajax/partlookup', function(req, res) {
 
 /* SOCKET.IO */
 io.sockets.on('connection', function (socket) {
-  //Month: 0 is Jan, 1 is Feb, 7 is Aug, etc.
-  //Year, Month, Day, Hours, Minutes, Seconds, Miliseconds
-  var sDate = new Date(2012, 7, 31, 19, 00, 00, 00);
+  var sDate = new Date(config.indStart.year, config.indStart.month, config.indStart.day, config.indStart.hour, config.indStart.minute, 00, 00);
   var emitServerTime = function() {
     var cDate = new Date();
 	socket.emit('serverTime', { time: cDate.getTime() });
