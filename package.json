@@ -10,6 +10,7 @@
     "jade": "*",
     "stylus": "*",
     "socket.io": "*",
-    "mongojs":"*"
+    "mongojs":"*",
+    "connect":"*"
   }
 }
