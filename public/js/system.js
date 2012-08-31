@@ -1,23 +1,22 @@
 
     var socket = io.connect('http://192.168.1.100:3000');
-    var sTime = 0;
-    var cTime = 0;
-    socket.on('startTime', function (data) {
-        sTime = data.time;
-    });
-    
+    var startTime = 0;
+    var serverTime = 0;
+
+    var stopwatch = new Stopwatch(refreshTimer, 100);
+
     socket.on('serverTime', function (data) {
-        cTime = data.time;
+        serverTime = data.time;
+        stopwatch.setServerTimeDiff(serverTime);
+    });
+    socket.on('startTime', function (data) {
+        startTime = data.time;
+        stopwatch.start(startTime, serverTime);
     });
     
+
 /* DOCUMENT READY */
 	$(document).ready(function() {
-		//Path.history.listen();
-		//$("a").click(function(event){
-		//	event.preventDefault();
-		//	Path.history.pushState({}, "", $(this).attr("href"));
-		//});
-		
 		$('body').on('blur', '.mandatory', checkEmpty);
 		$('body').on('blur', '#number', validateNumber);
 		$('body').on('blur', '#name', validateName);
@@ -40,7 +39,6 @@
 			$('#submit').attr('disabled', 'disabled');
 		});
 		assignNameTypeahead();
-        setInterval(function(){refreshTimer()},100);
 	});
 
 /* FUNCTIONS */
@@ -215,18 +213,6 @@
 	}
 
     /* STOPWATCH */
-    var timer = new Date();
-    function refreshTimer() {
-        if(cTime >= sTime) {
-            timer.setTime(cTime - sTime);
-        } else {
-            timer.setTime(sTime - cTime);
-        }
-        
-        timer.setHours(timer.getHours() + (timer.getTimezoneOffset()/60));
-        document.getElementById("stopwatch").innerHTML = timer.getHours() + ':' +
-                                                         (timer.getMinutes() < 10 ? '0' + timer.getMinutes() : timer.getMinutes()) + ':' +
-                                                         (timer.getSeconds() < 10 ? '0' + timer.getSeconds() : timer.getSeconds()) + ',' +
-                                                         Math.round(timer.getMilliseconds()/100);
-        cTime = cTime + 100;
+    function refreshTimer(watch) {
+        document.getElementById("stopwatch").innerHTML = watch.toString();
     }

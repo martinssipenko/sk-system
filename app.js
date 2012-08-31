@@ -80,13 +80,13 @@ app.post('/ajax/partlookup', function(req, res) {
 io.sockets.on('connection', function (socket) {
   //Month: 0 is Jan, 1 is Feb, 7 is Aug, etc.
   //Year, Month, Day, Hours, Minutes, Seconds, Miliseconds
-  var sDate = new Date(2012, 7, 29, 12, 00, 00, 00);
-  var emitTime = function() {
+  var sDate = new Date(2012, 7, 31, 19, 00, 00, 00);
+  var emitServerTime = function() {
     var cDate = new Date();
 	socket.emit('serverTime', { time: cDate.getTime() });
   }
-  emitTime();
-  setInterval(function(){emitTime();}, 60000);
+  emitServerTime();
+  setInterval(function(){emitServerTime();}, 60000);
   socket.emit('startTime', { time: sDate.getTime() });
 });
 
